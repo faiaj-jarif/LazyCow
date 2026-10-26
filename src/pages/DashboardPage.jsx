@@ -61,86 +61,65 @@ export default function DashboardPage() {
                         />
                     </div>
 
-                    <button className="bg-accent text-background font-bold px-4 py-2 rounded-full flex items-center gap-2 text-sm hover:opacity-90 transition-opacity">
+                    <button className="bg-accent text-background font-bold px-4 py-2 rounded-full flex items-center gap-2 text-sm opacity-85 hover:opacity-100 ">
                         <Plus size={16} />
                         New Shortcut
                     </button>
                 </div>
             </div>
 
-            {/* Shortcut Cards Grid */}
-            {/* 
-        Uses CSS Grid. minmax(300px, 1fr) ensures cards are at least 300px wide, 
-        but stretch to fill available space evenly.
-      */}
-            {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {dummyShortcuts.map(shortcut => (
-                    <div
-                        key={shortcut.id}
-                        className="bg-white/5 border border-white/5 rounded-xl p-5 hover:bg-white/10 transition-colors flex flex-col gap-4"
-                    >
-                        <div className="flex justify-between items-start">
-                            <h3 className="font-semibold text-lg">{shortcut.name}</h3>
-                            <button className="text-gray-400 hover:text-white">⋮</button>
-                        </div>
-
-                        <p className="text-sm text-gray-400 flex">{shortcut.description}</p>
-
-                        <div className="flex justify-between items-center mt-2">
-                            <span className="text-xs bg-black/30 px-2 py-1 rounded text-gray-300 font-mono">
-                                {shortcut.hotkey}
-                            </span>
-                            <button className="bg-accent text-background text-sm font-semibold p-1 rounded-md opacity-90 hover:opacity-100">
-                                Run Now
-                            </button>
-                        </div>
-                    </div>
-                ))}
-            </div> */}
 
             {/* Shortcut Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {dummyShortcuts.map(shortcut => (
-                    <div
-                        key={shortcut.id}
-                        // Added border-l-4 for a subtle accent color highlight on the left edge
-                        className="bg-surface rounded-xl p-5 hover:bg-white/5 flex flex-col gap-3 group"
-                    >
-                        {/* Header Row: Title and 3-dot Menu */}
-                        <div className="flex justify-between items-start">
-                            <h3 className="font-bold text-md text-white group-hover:text-accent ">
-                                {shortcut.name}
-                            </h3>
-                            <button className="text-gray-500 hover:text-white h-6 w-6 flex items-center justify-center rounded">
-                                ⋮
-                            </button>
-                        </div>
 
-                        {/* Description */}
-                        <p className="text-sm text-gray-400 flex-1 leading-relaxed">
-                            {shortcut.description}
-                        </p>
+                {
+                    dummyShortcuts
+                        .map(shortcut => (
+                            <div
+                                key={shortcut.id}
+                                className="bg-surface rounded-xl p-5 hover:bg-white/5 flex flex-col gap-4 group"
+                            >
 
-                        {/* Footer Row: Hotkey Badge and Run Button */}
-                        <div className="flex justify-between items-center mt-3 pt-3 border-t border-white/5">
-                            {/* Hotkey Badge styled like a keyboard key */}
-                            <span className="text-xs bg-black/40 border border-white/10 px-2 py-1 rounded text-gray-300 font-mono tracking-wider">
-                                {shortcut.hotkey}
-                            </span>
+                                {/* Header Row: Title and 3-dot Menu */}
+                                <div className="flex justify-between items-start">
+                                    <h3 className="font-semibold text-lg text-white group-hover:text-accent ">
+                                        {shortcut.name}
+                                    </h3>
+                                    <button className="text-gray-500 hover:text-white h-6 w-6 flex items-center justify-center rounded">
+                                        ⋮
+                                    </button>
+                                </div>
 
-                            {/* Secured items get a different style run button to indicate danger/confirmation */}
-                            {shortcut.isSecured ? (
-                                <button className="text-red-400 text-sm font-bold px-3 py-1.5 rounded hover:bg-red-400/10 ">
-                                    Run Secured
-                                </button>
-                            ) : (
-                                <button className="text-accent text-sm font-bold px-3 py-1.5 rounded hover:bg-accent/10 ">
-                                    Run Shortcut
-                                </button>
-                            )}
-                        </div>
-                    </div>
-                ))}
+
+                                {/* Description */}
+                                <p className="text-sm text-gray-400 flex pr-6">
+                                    {shortcut.description}
+                                </p>
+
+
+                                {/* Footer Row: Hotkey Badge and Run Button */}
+                                <div className="flex justify-between gap-2 items-center mt-3 pt-3 border-t border-white/5">
+
+                                    {/* Hotkey Badge styled like a keyboard key */}
+                                    <span className="text-xs bg-black/40 px-2.5 py-1.5 rounded text-gray-300 font-mono ">
+                                        {shortcut.hotkey}
+                                    </span>
+
+
+                                    {/* Secured items get a different style run button to indicate danger/confirmation */}
+                                    <button
+                                        className={`text-sm font-semibold px-2 py-1 rounded opacity-85
+                                        ${shortcut.isSecured ?
+                                                " text-gray-300 bg-red-950 hover:bg-red-900 " : "text-background bg-accent/70 hover:opacity-100 "}`}
+                                    >
+                                        {shortcut.isSecured ? <>Run Secured</> : <>Run Now</>}
+                                    </button>
+                                </div>
+                            </div>
+                        )
+                        )
+                }
+
             </div>
 
         </div>
