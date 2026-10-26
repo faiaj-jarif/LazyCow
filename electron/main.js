@@ -14,9 +14,11 @@ function createWindow() {
       nodeIntegration: false,
       contextIsolation: true,
       // Connect our new preload script to the window
-      preload: path.join(__dirname, 'preload.cjs')
+      preload: path.join(__dirname, 'preload.js')
     }
   })
+
+  mainWindow.setMenu(null)
 
   // Listen for React asking for the color. We grab it from Windows, slice it to standard length, and add the '#'
   ipcMain.handle('get-accent-color', () => {

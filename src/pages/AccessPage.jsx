@@ -4,13 +4,30 @@ import { Mail, Lock, LogIn, UserPlus, User } from 'lucide-react';
 
 export default function AccessPage() {
 	const [isLogin, setIsLogin] = useState(true);
+
+	// State to hold form values for validation
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [confirmPassword, setConfirmPassword] = useState('');
+
 	const navigate = useNavigate();
 
 	// Handle Login / Sign-up submission
 	const handleAuth = (e) => {
 		e.preventDefault();
+
+		if (!isLogin) {
+			// Validate passwords match during Sign Up
+			if (password !== confirmPassword) {
+				alert("Passwords do not match! Please try again.");
+				return; // Stop the submission
+			}
+			console.log("Registering new user:", email);
+		} else {
+			console.log("Authenticating user:", email);
+		}
+
 		// TODO: Connect to Supabase Auth here in the future
-		console.log(isLogin ? "Authenticating user..." : "Registering new user...");
 		navigate('/dashboard'); // Route to dashboard after success
 	};
 
@@ -36,19 +53,24 @@ export default function AccessPage() {
 						LazyCow<span className="text-white">.</span>
 					</h1>
 					<p className="text-gray-400 text-sm">
-						Automate your work-setup
+						Automate your WorkFlow-setup
 					</p>
 				</div>
 
 				{/* Form Toggle (Login vs Sign-up) */}
 				<div className="flex bg-black/40 p-1 rounded-lg">
+					{/* Login Button */}
 					<button
+						type="button"
 						onClick={() => setIsLogin(true)}
 						className={`flex-1 py-2 text-sm font-bold rounded-md ${isLogin ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-gray-300'}`}
 					>
 						Login
 					</button>
+
+					{/* Sign-up Button */}
 					<button
+						type="button"
 						onClick={() => setIsLogin(false)}
 						className={`flex-1 py-2 text-sm font-bold rounded-md transition-all ${!isLogin ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-gray-300'}`}
 					>
@@ -65,6 +87,8 @@ export default function AccessPage() {
 						<input
 							type="email"
 							placeholder="Email Address"
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
 							required
 							className="w-full bg-black/30 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-accent "
 						/>
@@ -76,10 +100,27 @@ export default function AccessPage() {
 						<input
 							type="password"
 							placeholder="Password"
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
 							required
 							className="w-full bg-black/30 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-accent "
 						/>
 					</div>
+
+					{/* Conditionally Rendered Confirm Password Input */}
+					{!isLogin && (
+						<div className="relative">
+							<Lock className="absolute left-3 top-3 text-gray-500" size={18} />
+							<input
+								type="password"
+								placeholder="Confirm Password"
+								value={confirmPassword}
+								onChange={(e) => setConfirmPassword(e.target.value)}
+								required={!isLogin} // Only required if signing up
+								className="w-full bg-black/30  rounded-lg py-2.5 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-accent"
+							/>
+						</div>
+					)}
 
 					{/* Submit Button */}
 					<button

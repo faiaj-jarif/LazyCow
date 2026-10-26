@@ -77,7 +77,7 @@ export default function DashboardPage() {
                         .map(shortcut => (
                             <div
                                 key={shortcut.id}
-                                className="bg-surface rounded-xl p-5 hover:bg-white/5 flex flex-col gap-4 group"
+                                className="bg-surface hover:bg-white/5 rounded-xl p-5 border border-transparent  hover:border-white/10 flex flex-col gap-4 group"
                             >
 
                                 {/* Header Row: Title and 3-dot Menu */}
