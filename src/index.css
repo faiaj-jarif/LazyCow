@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --color-accent: var(--os-accent-color, #cca028);
+  --color-background: #1f1f1f; 
+  --color-surface: #2d2d2d;
+  
+  /* Force Tailwind to use the native Windows font stack */
+  --font-sans: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+}
+
+@layer base {
+  body {
+    /* bg-background and text-white remain, and font-sans now points to Segoe UI */
+    @apply bg-background text-white m-0 p-0 font-sans overflow-hidden select-none;
+  }
+}
