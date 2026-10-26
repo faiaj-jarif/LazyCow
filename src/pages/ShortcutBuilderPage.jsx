@@ -1,5 +1,6 @@
 import { ArrowLeft, Save } from 'lucide-react';
 import ItemPickerSection from '../components/builder/ItemPickerSection';
+import HotkeyRecorder from '../components/builder/HotkeyRecorder';
 
 export default function ShortcutBuilderPage() {
 	return (
@@ -45,17 +46,15 @@ export default function ShortcutBuilderPage() {
 					</div>
 
 					{/* Item Picker Section */}
-                    <ItemPickerSection />
+					<ItemPickerSection />
 
 				</div>
 
 				{/* Right Column: Trigger & Options (FR_22) */}
 				<div className="flex flex-col gap-6">
 
-					{/* Placeholder for HotkeyRecorder */}
-					<div className="bg-surface p-6 rounded-xl border border-white/5 min-h-[200px] flex items-center justify-center ">
-						<span className="text-gray-500">Hotkey Recorder (To be implemented)</span>
-					</div>
+					{/* Hotkey Recorder Section */}
+					<HotkeyRecorder />
 
 				</div>
 			</div>
